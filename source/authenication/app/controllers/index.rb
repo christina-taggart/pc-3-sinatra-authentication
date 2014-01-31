@@ -9,7 +9,7 @@ end
 get '/sessions/new' do
   # render sign-in page 
 end
- DO STUFF
+
 post '/sessions' do
   # sign-in
 end
