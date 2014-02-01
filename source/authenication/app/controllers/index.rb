@@ -16,8 +16,8 @@ get '/sessions/new' do
 end
 
 post '/sessions' do
-  @user = User.find_by_email(params[:email])
-  redirect_to_proper_page
+  assign_user
+  authorized_redirect('/', '/sessions/new')
 end
 
 delete '/sessions/:id' do

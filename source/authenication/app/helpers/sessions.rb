@@ -20,12 +20,16 @@ helpers do
     session[:user_id] = @user.id
   end
 
-  def redirect_to_proper_page
+  def assign_user
+    @user = User.find_by_email(params[:email])
+  end
+
+  def authorized_redirect(auth_route, non_auth_route)
     if @user.password == params[:password]
       sign_in
-      redirect '/'
+      redirect auth_route
     else
-      redirect '/sessions/new'
+      redirect non_auth_route
     end
   end
 
