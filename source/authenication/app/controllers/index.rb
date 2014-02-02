@@ -1,6 +1,14 @@
+#-----AUTHORIZATION FILTER-----
+
+before do
+  if session[:id] ? @logged_in = true : false
+  if session[:id] ? @users = User.all : @users = nil
+  if session[:access_level] ? @access_level = session[:access_level] : @access_level = nil
+end
+
+#----- INDEX ------
+
 get '/' do
-  # render home page
- #TODO: Show all users if user is signed in
   erb :index
 end
 
