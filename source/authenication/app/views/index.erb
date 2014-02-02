@@ -5,6 +5,12 @@
         <p><%= user.name %></p>
         <p><%= user.email %></p>
         <p><%= user.access_level %></p>
+        <% if @access_level == "admin" %>
+          <form action="/users/<%= user.id %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="Delete user">
+          </form>
+        <% end %>
       </div>
     <% end %>
   <% else %>

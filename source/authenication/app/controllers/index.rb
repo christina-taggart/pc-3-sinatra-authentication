@@ -56,3 +56,8 @@ post '/users' do
     redirect '/users/new'
   end
 end
+
+delete '/users/:user_id' do
+  User.find(params[:user_id]).destroy
+  redirect '/'
+end
