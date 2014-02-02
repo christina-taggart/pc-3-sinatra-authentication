@@ -22,6 +22,7 @@ end
 post '/sessions' do
   if User.authenticate(params[:email], params[:password])
     user = User.where(email: params[:email]).first
+    session[:error] = nil
     session[:id] = user.id
     session[:access_level] = user.access_level
     redirect '/'
@@ -40,15 +41,18 @@ end
 #----------- USERS -----------
 
 get '/users/new' do
+  @error = session[:error]
   erb :sign_up
 end
 
 post '/users' do
-  new_user = User.create(name: params[:name], email: params[:email], password_hash: params[:password])
+  new_user = User.create(name: params[:name], email: params[:email], 
+                         password_hash: params[:password_hash], access_level: "student")
   if new_user.save
+    session[:error] = nil
     redirect '/sessions/new'
   else
-    @error = "Email must be unique. Password must be 6 characters long."
+    session[:error] = "Email must be unique."
     redirect '/users/new'
   end
 end
