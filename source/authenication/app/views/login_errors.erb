@@ -1,0 +1,10 @@
+<% unless flash[:errors] == nil %>
+	<ul>
+		<% flash[:errors][:email].each do |message| %>
+			<li><%= message %></li>
+		<% end %>
+		<% flash[:errors][:password].each do |message| %>
+			<li><%= message %></li>
+		<% end %>
+	</ul>
+<% end %>

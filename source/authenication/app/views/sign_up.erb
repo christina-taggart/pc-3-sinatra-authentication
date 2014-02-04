@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Sign Up</h1>
-  <%= flash[:errors] if flash[:errors] != nil %>
+  <%= erb :login_errors %>
   <form id="sign-up" method="post" action="/users">
     <label class="label" for="name">Name</label>
     <input type="text" name="user[name]" placeholder="e.g., joe" >
