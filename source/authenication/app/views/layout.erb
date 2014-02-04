@@ -18,7 +18,7 @@
     <ul>
       <% if current_user %>
         <li>
-          <form id="sign-out" action="/sessions/<%= current_user.id %>" method="post">
+          <form class = "sign_out" id="sign-out" action="/sessions/<%= current_user.id %>" method="post">
             <input name="_method" type="hidden" value="delete" />
             <input type="submit" value="Sign Out">
           </form>

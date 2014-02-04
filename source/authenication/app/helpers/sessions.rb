@@ -21,11 +21,11 @@ helpers do
   end
 
   def assign_user
-    @user = User.find_by_email(params[:email])
+    @user = User.find_by_email(params[:user][:email])
   end
 
   def authorized_redirect(auth_route, non_auth_route)
-    if @user.password == params[:password]
+    if @user.password == params[:user][:password]
       sign_in
       redirect auth_route
     else

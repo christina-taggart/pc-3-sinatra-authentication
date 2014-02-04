@@ -1,4 +1,5 @@
 enable :sessions
+use Rack::Flash
 
 get '/' do
   if signed_in?
@@ -33,4 +34,14 @@ end
 
 post '/users' do
   user = User.new(params[:user])
+  if user.valid?
+    user.save
+    # flash[:errors] = ""  # Find cleaner way to deal with this
+    assign_user
+    sign_in
+    redirect '/'
+  else
+    flash[:errors] = user.errors.messages
+    redirect '/users/new'
+  end
 end

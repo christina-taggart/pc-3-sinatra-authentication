@@ -45,6 +45,11 @@ nav li a:hover {
   text-decoration: underline;
 }
 
+nav form{
+  height: 40px;
+  float: right;
+}
+
 form label {
   font-weight: bold;
   margin-right: 20px;

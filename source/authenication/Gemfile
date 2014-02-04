@@ -8,6 +8,7 @@ gem 'pg'
 gem 'sinatra'
 gem 'sinatra-contrib'
 
+
 # Use Thin for our web server
 gem 'thin'
 
@@ -18,6 +19,8 @@ gem 'rake'
 gem 'bcrypt-ruby'
 
 gem 'shotgun'
+
+gem 'rack-flash3'
 
 group :test do
   gem 'shoulda-matchers'

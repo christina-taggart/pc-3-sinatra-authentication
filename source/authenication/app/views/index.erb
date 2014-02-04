@@ -1,11 +1,10 @@
 <div class="container">
-  <div>Welcome!</div>
-  <% @users.each do |user| %>
-  <ul>
-    <div><%= user.name %></div>
-  </ul>
-  <% end %>
-  <%# TODO:
-  1. If user is not signed in - display "Welcome".
-  2. If user is signed in then  display all users %>
+  <!-- <div>Welcome!</div> -->
+  <div>
+  	<ul>
+	  <% @users.each do |user| %>
+	    <li><%= user.name %></li>
+	  <% end %>
+  	</ul>
   </div>
+</div>
