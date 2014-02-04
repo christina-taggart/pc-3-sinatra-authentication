@@ -36,7 +36,6 @@ post '/users' do
   user = User.new(params[:user])
   if user.valid?
     user.save
-    # flash[:errors] = ""  # Find cleaner way to deal with this
     assign_user
     sign_in
     redirect '/'

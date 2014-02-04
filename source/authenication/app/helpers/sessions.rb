@@ -25,12 +25,11 @@ helpers do
   end
 
   def authorized_redirect(auth_route, non_auth_route)
-    if @user.password == params[:user][:password]
+    if @user.nil? || @user.password != params[:user][:password]
+      redirect non_auth_route
+    else
       sign_in
       redirect auth_route
-    else
-      redirect non_auth_route
     end
   end
-
 end
