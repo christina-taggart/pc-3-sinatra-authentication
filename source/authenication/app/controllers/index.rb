@@ -7,7 +7,7 @@ end
 #----------- SESSIONS -----------
 
 get '/sessions/new' do
-  # render sign-in page 
+  # render sign-in page
 end
 
 post '/sessions' do
@@ -15,7 +15,7 @@ post '/sessions' do
 end
 
 delete '/sessions/:id' do
-  # sign-out -- invoked 
+  # sign-out -- invoked
 end
 
 #----------- USERS -----------
