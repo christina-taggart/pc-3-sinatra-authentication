@@ -4,15 +4,19 @@ require 'sinatra/flash'
 enable :session
 
 before do
+
   if session[:id]
+    @logged_in = true
     @current_user = User.find(session[:id])
   else
+    @logged_in = false
     @current_user = nil
   end
 end
 
 get '/' do
-  @users = User.all if session[:id]
+  @logged_in = params[:logged_in]
+  @users = User.all if @logged_in
   erb :index
 end
 
@@ -20,7 +24,7 @@ end
 
 get '/sessions/new' do
 
-  if session[:id] == nil
+  if @logged_in == false
     @login_error = flash[:errors]
     erb :sign_in
   else
@@ -31,8 +35,7 @@ end
 post '/sessions' do
   @password = Digest::SHA256.hexdigest(params[:password])
   if User.validate(params, @password)
-    session[:id] = User.find_by_email(params[:email]).id
-    redirect '/'
+    redirect '/?logged_in=true'
   else
     flash[:errors] = "Your email or passsword was incorrect"
     redirect '/sessions/new'
@@ -41,18 +44,20 @@ post '/sessions' do
 end
 
 delete '/sessions/:id' do
+  current_user = nil
   session[:id] = nil
+  @logged_in = false
   redirect '/'
 end
 
 #----------- USERS -----------
 
 get '/users/new' do
-  if session[:id] == nil
+  if @logged_in == false
     @errors = flash[:errors]
     erb :sign_up
   else
-    redirect '/'
+    redirect '/sessions/new'
   end
 end
 

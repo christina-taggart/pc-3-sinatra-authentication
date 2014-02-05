@@ -1,8 +1,9 @@
 <div class="container">
   <h1>Sign In</h1>
 
-  <% if @error %>
-    <div class="errors"><%= @error %></div>
+  <% if @login_error %>
+    <div class="errors"><%= @login_error %></div>
+    <br/>
   <% end %>
 
   <form id="sign-in" method="post" action="/sessions">

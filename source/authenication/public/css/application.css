@@ -16,7 +16,7 @@ nav {
   font-weight: bold;
 }
 
-nav .brand, nav .brand a {
+nav .brand, nav .brand a, nav .brand form {
   margin-left: 25px;
   font-size: 18pt;
   text-decoration: none;
