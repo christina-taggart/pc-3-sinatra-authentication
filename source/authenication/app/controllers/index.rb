@@ -1,6 +1,6 @@
 get '/' do
   # render home page
-  #TODO: Show all users if user is signed in
+  @users = User.all
   erb :index
 end
 
@@ -14,10 +14,13 @@ end
 post '/sessions' do
   # sign-in
   user = User.find_by_email(params[:email])
-  if user.authenticate_user(params[:password])
+  if !user.nil? && user.authenticate_user(params[:password])
     session[:user_id] = user.id
+    redirect '/'
+  else
+    @error = "Invalid username or password"
+    erb :sign_in
   end
-  redirect '/'
 end
 
 delete '/sessions/:id' do

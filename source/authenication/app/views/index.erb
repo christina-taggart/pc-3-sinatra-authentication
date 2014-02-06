@@ -1,13 +1,9 @@
 <div class="container">
-
-  <%# TODO: 
-  1. If user is not signed in - display "Welcome".
-  2. If user is signed in then  display all users %>
-
-
-  </div>
   <% if session[:user_id] %>
-    You signed in!!!!
+    <br>
+    <p>You're signed in!</p>
+    <%= erb :list_users %>
   <% else %>
-    Welcome...
+    <p>Welcome...</p>
   <% end %>
+</div>
