@@ -1,0 +1,9 @@
+<div class="container">
+	<% if current_user %>
+		<%= erb :user_list %>
+	<% else %>
+		<%= erb :welcome %>
+		you are not signed in
+	<% end %>
+
+</div>
