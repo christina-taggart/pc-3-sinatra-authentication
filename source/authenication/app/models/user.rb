@@ -1,5 +1,3 @@
-require 'bcrypt'
-
 class User < ActiveRecord::Base
   include BCrypt
 
@@ -10,5 +8,12 @@ class User < ActiveRecord::Base
   def password=(new_password)
     @password = Password.create(new_password)
     self.password_hash = @password
+  end
+
+  def self.create_secure(params)
+    user = User.new(params)
+    user.password = params[:password]
+    user.save
+    user
   end
 end

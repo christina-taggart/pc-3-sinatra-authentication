@@ -1,39 +1,52 @@
 before do
-  p session
   if session[:id]
     @logged_in = true
     @current_user = User.find(session[:id])
   else
     @logged_in = false
   end
+  @error = session[:error]
+  session[:error] = nil
 end
 
 get '/' do
-  # render home page
- #TODO: Show all users if user is signed in
+  @users = User.all if @logged_in
   erb :index
 end
 
 #----------- SESSIONS -----------
 
 get '/sessions/new' do
-  # render sign-in page
+  erb :sign_in
 end
 
 post '/sessions' do
-  # sign-in
+  user = User.find_by_email(params[:email])
+  unless user
+    session[:error] = "Email Not Found"
+    redirect '/sessions/new'
+  end
+  if user.password == params[:password]
+    session[:id] = user.id
+  else
+    session[:error] = "Password Incorrect"
+    redirect '/sessions/new'
+  end
+  redirect '/'
 end
 
 delete '/sessions/:id' do
-  # sign-out -- invoked
+  session[:id] = nil
+  redirect '/'
 end
 
 #----------- USERS -----------
 
 get '/users/new' do
-  # render sign-up page
+  erb :sign_up
 end
 
 post '/users' do
-  # sign-up a new user
+  session[:id] = User.create_secure(params[:user]).id
+  redirect '/'
 end
