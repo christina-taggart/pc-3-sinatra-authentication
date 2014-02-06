@@ -16,9 +16,9 @@
     <div class="brand"><a href="/">User Authentication</a>
     </div>
     <ul>
-      <% if current_user %>
+      <% if session[:user_id] %>
         <li>
-          <form id="sign-out" action="/sessions/<%= current_user.id %>" method="post">
+          <form id="sign-out" action="/sessions/<%= session[:user_id] %>" method="post">
             <input name="_method" type="hidden" value="delete" />
             <input type="submit" value="Sign Out">
           </form>

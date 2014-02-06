@@ -21,7 +21,9 @@ post '/sessions' do
 end
 
 delete '/sessions/:id' do
-  # sign-out -- invoked 
+  # sign-out -- invoked
+  session.clear
+  redirect '/'
 end
 
 #----------- USERS -----------
