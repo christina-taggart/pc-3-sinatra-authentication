@@ -7,7 +7,8 @@ end
 #----------- SESSIONS -----------
 
 get '/sessions/new' do
-  # render sign-in page 
+  # render sign-in page
+  erb :sign_in
 end
 
 post '/sessions' do
@@ -28,4 +29,5 @@ end
 post '/users' do
   # sign-up a new user
   User.create(params[:user])
+  redirect '/'
 end
