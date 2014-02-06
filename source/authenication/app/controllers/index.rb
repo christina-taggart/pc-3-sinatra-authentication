@@ -1,6 +1,5 @@
 get '/' do
-  # render home page
- #TODO: Show all users if user is signed in
+  @users= User.all
   erb :index
 end
 
@@ -25,5 +24,6 @@ get '/users/new' do
 end
 
 post '/users' do
+  User.create(name: params[:name], email: params[:email], password_hash: BCrypt::Password.create(params[:password],cost: 5))
   erb :sign_in
 end

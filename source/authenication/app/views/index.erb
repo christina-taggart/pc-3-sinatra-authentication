@@ -1,7 +1,7 @@
 <h1>Welcome!</h1>
 <div class="container">
   <h2>All Users:</h2>
-    <% @users.map do |user| %>
+    <% @users.each do |user| %>
     <div id= "user_list">
       <li><%= user.name %><li><br>
     </div>
