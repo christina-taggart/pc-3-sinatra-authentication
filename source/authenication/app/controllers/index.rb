@@ -15,6 +15,9 @@ get '/sessions/new' do
 end
 
 post '/sessions' do
+	@password = params[:password]
+	@email = params[:email]
+	@user = User.where("email = ?", @email.to_s)
   # sign-in
 end
 
@@ -33,7 +36,15 @@ end
 post '/users' do
   # sign-up a new user
   # User.create(params[:user])
-  @password = params[:user][:password_hash]
-  params[:user][:password_hash] = Password.create(@password)
-  User.create(params[:user])
+  def create
+    @user = User.new(params[:user])
+    @user.password = params[:password]
+    @user.save!
+  end
+
+  create
+  
+  # @password = params[:user][:password_hash]
+  # params[:user][:password_hash] = Password.create(@password)
+  # User.create(params[:user])
 end
