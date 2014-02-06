@@ -1,5 +1,7 @@
-before do
+#enable sessions
 
+before do
+  @logged_in = false
 end
 
 get '/' do
@@ -11,11 +13,12 @@ end
 #----------- SESSIONS -----------
 
 get '/sessions/new' do
-  # render sign-in page
+  erb :sign_in
 end
 
 post '/sessions' do
-  # sign-in
+  user = User.authenticate_password(params[:email], params[:password])
+  session[:user_id] = user.id
 end
 
 delete '/sessions/:id' do

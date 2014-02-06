@@ -1,4 +1,4 @@
-require 'faker'
+ require 'faker'
 
 User.create(name: 'Spencer', email: "spencer@example.com", password_hash: "admin")
 
