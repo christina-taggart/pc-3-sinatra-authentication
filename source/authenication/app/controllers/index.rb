@@ -22,6 +22,7 @@ get '/sessions/new' do
 
   if session[:id] == nil
     @login_error = flash[:errors]
+    @email = params[:email]
     erb :sign_in
   else
     redirect '/'
@@ -35,7 +36,7 @@ post '/sessions' do
     redirect '/'
   else
     flash[:errors] = "Your email or passsword was incorrect"
-    redirect '/sessions/new'
+    redirect '/sessions/new?email=' + params[:email]
   end
 
 end
@@ -50,6 +51,8 @@ end
 get '/users/new' do
   if session[:id] == nil
     @errors = flash[:errors]
+    @name = flash[:name] #params[:name]
+    @email = flash[:email] #params[:email]
     erb :sign_up
   else
     redirect '/'
@@ -64,6 +67,9 @@ post '/users' do
     redirect '/'
   else
     flash[:errors] = @user.errors.full_messages
+    flash[:name] = params[:name]
+    flash[:email] = params[:email]
     redirect '/users/new'
+    # redirect '/users/new?name=' + params[:name] + '&email=' + params[:email]
   end
 end

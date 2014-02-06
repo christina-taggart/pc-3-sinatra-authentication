@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :email, uniqueness: true
   validates :password_hash, presence: true
+  validates :password_hash, length: {minimum: 6}
   before_save :encrypt_password
 
 
