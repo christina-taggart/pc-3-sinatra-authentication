@@ -58,8 +58,12 @@ h1, h2 {
   text-align: center;
 }
 
-.user_list {
+#user_list {
   margin: 0 auto;
+}
+
+#user_list li {
+  list-style: none;
 }
 
 .errors {
