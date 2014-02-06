@@ -1,4 +1,16 @@
 <div class="container">
+  <% if session[:signed_in] == true %>
+
+    <% @users = User.all %>
+    <ul>
+    <% @users.each do |user| %>
+      <li> <%= user.name %> </li>
+    <% end %>
+    </ul>
+
+  <% else %>
+    <p>Welcome to this random page.  You aren't signed in right now</p>
+  <% end %>
 
   <%# TODO: 
   1. If user is not signed in - display "Welcome".

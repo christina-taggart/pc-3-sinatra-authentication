@@ -14,4 +14,7 @@
     <div class="submit"><input type="submit" value="Sign In"></div>
   </form>
 
+  <% if session[:message] %>
+  <p> <%= "#{session[:message]}" %> </p>
+  <% end %>
 </div>

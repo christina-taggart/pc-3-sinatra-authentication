@@ -4,6 +4,7 @@ include BCrypt
 get '/' do
   # render home page
  #TODO: Show all users if user is signed in
+  session[:message] = nil
   erb :index
 end
 
@@ -15,9 +16,7 @@ get '/sessions/new' do
 end
 
 post '/sessions' do
-	@password = params[:password]
-	@email = params[:email]
-	@user = User.where("email = ?", @email.to_s)
+	login
   # sign-in
 end
 
@@ -35,16 +34,16 @@ end
 
 post '/users' do
   # sign-up a new user
-  # User.create(params[:user])
+
   def create
     @user = User.new(params[:user])
-    @user.password = params[:password]
+    # puts "*"* 50
+    # p params[:user][:password]
+    #    puts "*"* 50
+    @user.password = params[:user][:password]
     @user.save!
   end
 
   create
-  
-  # @password = params[:user][:password_hash]
-  # params[:user][:password_hash] = Password.create(@password)
-  # User.create(params[:user])
+
 end
