@@ -13,6 +13,11 @@ end
 
 post '/sessions' do
   # sign-in
+  user = User.find_by_email(params[:email])
+  if user.authenticate_user(params[:password])
+    session[:user_id] = user.id
+  end
+  redirect '/'
 end
 
 delete '/sessions/:id' do
