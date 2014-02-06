@@ -1,3 +1,4 @@
 class User < ActiveRecord::Base
-  #TODO : Use bcrypt to store hashed passwords and authenticate users
+  @users= User.all
+  @password= BCrypt::Password.create(params[:password])
 end

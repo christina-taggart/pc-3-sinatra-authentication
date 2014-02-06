@@ -1,6 +1,10 @@
+<h1>Welcome!</h1>
 <div class="container">
+  <h2>All Users:</h2>
+    <% @users.map do |user| %>
+    <div id= "user_list">
+      <li><%= user.name %><li><br>
+    </div>
+  <% end %>
+</div>
 
-  <%# TODO: 
-  1. If user is not signed in - display "Welcome".
-  2. If user is signed in then  display all users %>
-  </div>

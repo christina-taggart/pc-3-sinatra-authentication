@@ -54,6 +54,14 @@ input {
   margin-bottom: 10px;
 }
 
+h1, h2 {
+  text-align: center;
+}
+
+.user_list {
+  margin: 0 auto;
+}
+
 .errors {
   color: red;
 }
