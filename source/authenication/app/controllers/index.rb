@@ -7,12 +7,16 @@ end
 #----------- SESSIONS -----------
 
 get '/sessions/new' do
-  # render sign-in page 
+  # render sign-in page
   erb :sign_in
 end
 
 post '/sessions' do
-  erb :sign_in
+  user = User.find_by_email(params[:email])
+  if user.password == params[:password]
+    session[:id] = user.id
+  end
+  redirect '/'
 end
 
 delete '/sessions/:id' do
