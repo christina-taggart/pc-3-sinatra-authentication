@@ -2,7 +2,7 @@ get '/' do
   # render home page
  #TODO: Show all users if user is signed in
  	@users = User.all
- 	@user = User.last
+ 	@user = User.find(session[:user_id]) if session[:user_id]
   erb :index
 end
 
@@ -15,11 +15,18 @@ end
 
 post '/sessions' do
   # sign-in
-  redirect "/"
+  @user = User.find_by_email(params[:email])
+  if @user.password == params[:password]
+    session[:user_id] = @user.id
+    redirect "/"
+  else
+    redirect back
+  end
 end
 
 delete '/sessions/:id' do
   # sign-out -- invoked 
+  session.delete(:user_id)
   redirect "/"
 end
 
@@ -33,7 +40,7 @@ end
 post '/users' do
   # sign-up a new user
   user = params[:user]
-  pass = user.delete(:password)
+  pass = user.delete("password")
   @user = User.new(user)
   @user.password = pass
   if @user.save
