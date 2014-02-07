@@ -8,5 +8,11 @@ require 'faker'
 # 5.times do
 #   User.create :name => Faker::Name.name, :email => Faker::Internet.email, :password => 'password'
 # end
+class SeedUsers
+		test_user = User.new(name:'Darcey', email: 'darcey@awesome.com', password: 'asdf')
+		test_user.save
+		5.times { User.create(name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Lorem.word) }
 
-User.create :name => 'Darcey', :email => 'darcey@awesome.com', :password => 'asdf'
+	
+end
+

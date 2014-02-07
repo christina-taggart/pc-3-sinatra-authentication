@@ -1,8 +1,14 @@
 <div class="container">
-
+<br>
 <% if current_user %>
-  remeber to display all user!
+<%@users.each do |user|%>
+  <p><%=user.name%></p>
+  <%end%>
 <% else %>
   <p>Welcome</p>
 <% end %>
+
+<% if @user_created %>
+<p>welcome to the page!</p>
+<%end%>
 </div>

@@ -1,6 +1,11 @@
 helpers do
 	def current_user
-        return false unless session[:id]
-        User.find(session[:id])
-    end
+		User.find(session[:id]) if session[:id]
+	end
+
+	def login
+		if @user.password == params[:password]
+			session[:id] = @user.id
+		end
+	end
 end
