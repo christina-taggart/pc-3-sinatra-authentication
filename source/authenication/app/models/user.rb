@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   attr_accessor :password
   before_save :hash_password	
 
+  def authenticate(password) 
+  	password == BCrypt::Password.new(self.password_hash)
+  end
 
   def hash_password
 	  self.password_hash = BCrypt::Password.create(self.password)

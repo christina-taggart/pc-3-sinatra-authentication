@@ -1,6 +1,8 @@
+
+enable :sessions
+
 get '/' do
-  # render home page
- #TODO: Show all users if user is signed in
+ @users = User.all
   erb :index
 end
 
@@ -13,10 +15,18 @@ end
 
 post '/sessions' do
   # sign-in
+  @user = User.find_by_email(params[:email])
+  if @user.authenticate(params[:password])
+  	  session[:logged_id] = true
+  	  session[:email] = params[:email]
+  end
+  redirect '/'
 end
 
 delete '/sessions/:id' do
   # sign-out -- invoked 
+  session[:logged_in] = false
+  redirect '/'
 end
 
 #----------- USERS -----------
@@ -29,5 +39,5 @@ end
 post '/users' do
   # sign-up a new user
   User.create(params[:user])
-  erb :index
+  redirect '/'
 end
