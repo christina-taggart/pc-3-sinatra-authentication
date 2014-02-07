@@ -2,6 +2,6 @@
   <% if @logged_in %>
     <%= User.all.map { |user| user.name } %>
   <% else %>
-    <p>Welcome!</p>
+    <h1>Welcome!</h1>
   <% end %>
 </div>

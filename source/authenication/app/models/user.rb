@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   validates :email, uniqueness: true
   before_save :encrypt
-  before_create :encrypt
 
   def self.authenticate_password(email, password_plain_text)
     encrypted_password = self.encrypt(password_plain_text)
@@ -9,8 +8,7 @@ class User < ActiveRecord::Base
   end
 
   def self.encrypt(password_plain_text)
-    f = BCrypt::Password.create(password_plain_text, cost: 10)
-    f.hash
+    BCrypt::Password.create(password_plain_text, cost: 10)
   end
 
   private

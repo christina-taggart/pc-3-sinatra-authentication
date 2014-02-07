@@ -5,8 +5,6 @@ before do
 end
 
 get '/' do
-  # render home page
- #TODO: Show all users if user is signed in
   erb :index
 end
 
@@ -28,9 +26,9 @@ end
 #----------- USERS -----------
 
 get '/users/new' do
-  # render sign-up page
+  erb :sign_up
 end
 
 post '/users' do
-  # sign-up a new user
+  user = User.create(name: params[:user_name], email: params[:user_email], password_hash: params[:user_password])
 end
