@@ -1,8 +1,7 @@
-#enable sessions
-
 before do
 	if session[:id]
 		@logged_in = true
+		@current_user = User.find(session[:id])
 	else
   	@logged_in = false
   end
@@ -20,12 +19,15 @@ end
 
 post '/sessions' do
 	user = User.find_by_email(params[:email])
-	if user.password == params[:password]
-  	session[:id] = user.id
-  else
-  	puts "Incorrect Password!"
-  	@error
-  end
+	if user == nil
+		@error = "Not a registered user."
+	else
+		if user.password == params[:password]
+	  	session[:id] = user.id
+	  else
+	  	@error = "Incorrect Password"
+	  end
+	end
   redirect '/'
 end
 
