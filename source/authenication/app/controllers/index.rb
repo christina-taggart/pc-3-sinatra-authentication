@@ -37,9 +37,6 @@ post '/users' do
 
   def create
     @user = User.new(params[:user])
-    # puts "*"* 50
-    # p params[:user][:password]
-    #    puts "*"* 50
     @user.password = params[:user][:password]
     @user.save!
   end

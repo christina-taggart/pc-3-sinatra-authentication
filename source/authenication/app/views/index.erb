@@ -1,5 +1,5 @@
 <div class="container">
-  <% if session[:signed_in] == true %>
+  <% if session[:logged_in] == true %>
 
     <% @users = User.all %>
     <ul>
