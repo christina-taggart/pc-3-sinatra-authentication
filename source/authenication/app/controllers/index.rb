@@ -8,6 +8,7 @@ end
 
 get '/sessions/new' do
   # render sign-in page 
+  erb :sign_in
 end
 
 post '/sessions' do
@@ -22,8 +23,11 @@ end
 
 get '/users/new' do
   # render sign-up page
+  erb :sign_up
 end
 
 post '/users' do
   # sign-up a new user
+  User.create(params[:user])
+  erb :index
 end
