@@ -1,19 +1,21 @@
 class User < ActiveRecord::Base
+  include BCrypt
   validates :email, uniqueness: true
-  before_save :encrypt
+  validates :name, :email, :password_hash, presence: true
 
-  def self.authenticate_password(email, password_plain_text)
-    encrypted_password = self.encrypt(password_plain_text)
-    User.where(email: email, password_hash: encrypted_password).first
+  def password
+    @password ||= Password.new(password_hash)
   end
 
-  def self.encrypt(password_plain_text)
-    BCrypt::Password.create(password_plain_text, cost: 10)
+  def password=(new_password)
+    @password = Password.create(new_password)
+    self.password_hash = @password
   end
 
-  private
-
-  def encrypt
-    self.class.encrypt(password_hash)
+  def self.create_encryption(params)
+    user = User.new(params)
+    user.password = params[:password]
+    user.save
+    user
   end
 end

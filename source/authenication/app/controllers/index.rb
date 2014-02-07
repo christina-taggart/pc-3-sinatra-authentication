@@ -1,7 +1,11 @@
 #enable sessions
 
 before do
-  @logged_in = false
+	if session[:id]
+		@logged_in = true
+	else
+  	@logged_in = false
+  end
 end
 
 get '/' do
@@ -16,11 +20,12 @@ end
 
 post '/sessions' do
   user = User.authenticate_password(params[:email], params[:password])
-  session[:user_id] = user.id
+  session[:id] = user.id
 end
 
 delete '/sessions/:id' do
-  # sign-out -- invoked
+  session[:id] = nil
+  redirect '/'
 end
 
 #----------- USERS -----------
@@ -30,5 +35,6 @@ get '/users/new' do
 end
 
 post '/users' do
-  user = User.create(name: params[:user_name], email: params[:user_email], password_hash: params[:user_password])
+  session[:id] = User.create_encryption(name: params[:user_name], email: params[:user_email], password_hash: params[:user_password])
+  redirect '/'
 end
