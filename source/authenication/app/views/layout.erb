@@ -16,19 +16,22 @@
       <a href="/">User Authentication</a>
     </div>
   <nav>
-    <ul>
-        <% if session[:logged_in] %>
-        <li>
-          <form id="sign-out" action="/sessions" method="post">
-            <input name="_method" type="hidden" value="delete" />
-            <input type="submit" value="Sign Out">
-          </form>
-        </li>
+        <% if current_user != nil %>
+        <p>Welcome <%= current_user.name %></p>
+        <ul>
+          <li>
+            <form id="sign-out" action="/sessions" method="post">
+              <input name="_method" type="hidden" value="delete" />
+              <input type="submit" value="Sign Out">
+            </form>
+          </li>
+        </ul>
         <% else %>
+        <ul>
         <li><a href="/sessions/new">Sign In</a></li> 
         <li><a href="/users/new">Sign Up</a></li>
+      </ul>
         <% end %>
-    </ul>
   </nav>
 
   <%= yield %>

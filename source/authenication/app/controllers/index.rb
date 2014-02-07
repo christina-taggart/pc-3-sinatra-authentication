@@ -22,6 +22,7 @@ end
 
 delete '/sessions' do
 	session[:logged_in] = false
+	session[:id] = nil
 	erb :index
   # sign-out -- invoked 
 end
