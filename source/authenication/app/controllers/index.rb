@@ -20,7 +20,9 @@ post '/sessions' do
   # sign-in
 end
 
-delete '/sessions/:id' do
+delete '/sessions' do
+	session[:logged_in] = false
+	erb :index
   # sign-out -- invoked 
 end
 
