@@ -29,7 +29,6 @@ end
 #----------- USERS -----------
 
 get '/users/new' do
-
   # render sign-up page
   erb :sign_up
 end

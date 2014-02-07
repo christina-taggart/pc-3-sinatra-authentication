@@ -16,7 +16,7 @@ nav {
   font-weight: bold;
 }
 
-nav .brand, nav .brand a {
+.brand, .brand a {
   margin-left: 25px;
   font-size: 18pt;
   text-decoration: none;
@@ -27,6 +27,8 @@ nav .brand, nav .brand a {
 
 nav ul {
   display: inline-block;
+  float: right;
+  padding-right: 20px;
   width: 30%;
   text-align: right;
 }
@@ -36,7 +38,7 @@ nav li {
   display: inline;
 }
 
-nav li a {
+nav li a, nav li form input {
   color: gray;
   text-decoration: none;
 }

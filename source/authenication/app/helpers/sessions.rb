@@ -4,6 +4,7 @@ helpers do
 
   def current_user
      # TODO: return the current user if there is a user signed in.
+    User.find(session[:id])
   end
 
   def login
@@ -11,6 +12,7 @@ helpers do
     if @user.password == params[:password]
       session[:logged_in] = true
       session[:message] = nil
+      session[:id] = @user.id
       erb :index
     else
       # session[:logged_in] = false
