@@ -19,8 +19,14 @@ get '/sessions/new' do
 end
 
 post '/sessions' do
-  user = User.authenticate_password(params[:email], params[:password])
-  session[:id] = user.id
+	user = User.find_by_email(params[:email])
+	if user.password == params[:password]
+  	session[:id] = user.id
+  else
+  	puts "Incorrect Password!"
+  	@error
+  end
+  redirect '/'
 end
 
 delete '/sessions/:id' do
@@ -35,6 +41,6 @@ get '/users/new' do
 end
 
 post '/users' do
-  session[:id] = User.create_encryption(name: params[:user_name], email: params[:user_email], password_hash: params[:user_password])
+  session[:id] = User.create_encryption(name: params[:user_name], email: params[:user_email], password_hash: params[:user_password]).id
   redirect '/'
 end
