@@ -1,9 +1,10 @@
 
 enable :sessions
 
+
 get '/' do
- @users = User.all
-  erb :index
+	current_user
+ erb :index
 end
 
 #----------- SESSIONS -----------
@@ -16,16 +17,15 @@ end
 post '/sessions' do
   # sign-in
   @user = User.find_by_email(params[:email])
-  if @user.authenticate(params[:password])
-  	  session[:logged_id] = true
-  	  session[:email] = params[:email]
-  end
+    if @user.password == params[:password]
+      session[:id] = @user.id
+    end
   redirect '/'
 end
 
 delete '/sessions/:id' do
   # sign-out -- invoked 
-  session[:logged_in] = false
+  session[:id] = nil
   redirect '/'
 end
 
@@ -38,6 +38,8 @@ end
 
 post '/users' do
   # sign-up a new user
-  User.create(params[:user])
+  @user = User.new(params[:user])
+    @user.password = params[:user][:password]
+    @user.save!
   redirect '/'
 end

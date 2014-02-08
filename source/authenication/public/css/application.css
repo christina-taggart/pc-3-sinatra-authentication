@@ -17,12 +17,13 @@ nav {
 }
 
 nav .brand, nav .brand a {
+  margin-top: 5px;
   margin-left: 25px;
   font-size: 18pt;
   text-decoration: none;
   color: #444;
   width: 60%;
-  display: inline-block;
+  float: left;
 }
 
 nav ul {

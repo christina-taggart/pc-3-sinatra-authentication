@@ -1,16 +1,19 @@
 class User < ActiveRecord::Base
 	
   #TODO : Use bcrypt to store hashed passwords and authenticate users
-  attr_accessor :password
-  before_save :hash_password	
+  attr_accessor :password	
 
-  def authenticate(password) 
-  	password == BCrypt::Password.new(self.password_hash)
-  end
+  include BCrypt
 
-  def hash_password
-	  self.password_hash = BCrypt::Password.create(self.password)
-  end
+    def password
+      @password ||= Password.new(password_hash)
+    end
+
+    def password=(new_password)
+      @password = Password.create(new_password)
+      self.password_hash = @password
+    end
+
 end 
 
 
