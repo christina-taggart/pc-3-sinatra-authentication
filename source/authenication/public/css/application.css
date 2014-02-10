@@ -1,5 +1,5 @@
 .container {
-  margin: 20px auto;
+  margin: 50px auto;
   width: 800px;
   padding: 0px 20px 20px 20px;
   border: 1px dotted black;
@@ -78,4 +78,12 @@ form.quirks {
   border:none;
   background:none;
   font-weight: :bold;
+}
+
+.brand{
+  float: top;
+}
+
+.sign-out{
+  float: right;
 }

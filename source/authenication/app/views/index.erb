@@ -1,6 +1,20 @@
 <div class="container">
 
-  <%# TODO: 
-  1. If user is not signed in - display "Welcome".
-  2. If user is signed in then  display all users %>
-  </div>
+  <% if session[:id] != nil && @user %>
+    Logged in as: <%= @user.name %>
+    <div class="user_list">
+      <br>
+      <table border="1">
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %>
+            <td><%= user.email %>
+        <% end %>
+        </table>
+    </div>
+  <% else %>
+    Welcome
+  <% end %>
+
+
+</div>
