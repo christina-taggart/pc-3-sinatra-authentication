@@ -1,5 +1,6 @@
 #TODO : Use bcrypt to store hashed passwords and authenticate users
 require 'bcrypt'
+require 'debugger'
 
 class User < ActiveRecord::Base
   # users.password_hash in the database is a :string
